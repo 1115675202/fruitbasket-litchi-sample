@@ -1,0 +1,3 @@
+# Project exclude paths
+/fruitbasket-litchi-disruptor/target/
+/kafka/fruitbasket-litchi-kafka/target/
