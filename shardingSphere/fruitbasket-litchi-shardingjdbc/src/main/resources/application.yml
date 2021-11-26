@@ -18,13 +18,14 @@ spring:
 
     rules:
       sharding:
+        # 分片算法
         sharding-algorithms:
-
+          # 数据库
           database-inline:
             type: INLINE
             props:
               algorithm-expression: db$->{user_id % 2}
-
+          # t-order表
           t-order-inline:
             type: INLINE
             props:
@@ -51,9 +52,9 @@ spring:
                 shardingColumn: order_id
                 shardingAlgorithmName: t-order-inline
             # 主键策略
-            key-generate-strategy:
+            keyGenerateStrategy:
               column: order_id
-              key-generator-name: snowflake
+              keyGeneratorName: snowflake
     props:
       sql-show: true
 
