@@ -1,0 +1,61 @@
+spring:
+  shardingsphere:
+    # 数据源
+    datasource:
+      names: db0,db1
+      db0:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://mysql_node0:3306/order_database?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+        username: root
+        password: root
+      db1:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://mysql_node1:3306/order_database?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+        username: root
+        password: root
+
+    rules:
+      sharding:
+        sharding-algorithms:
+
+          database-inline:
+            type: INLINE
+            props:
+              algorithm-expression: db$->{user_id % 2}
+
+          t-order-inline:
+            type: INLINE
+            props:
+              algorithm-expression: t_order_$->{order_id % 2}
+
+        # 主键生成策略
+        key-generators:
+          snowflake:
+            type: SNOWFLAKE
+            props:
+              worker-id: 001
+
+        tables:
+          t_order:
+            actualDataNodes: db$->{0..1}.t_order_$->{0..1}
+            # 数据策略
+            databaseStrategy:
+              standard:
+                shardingColumn: user_id
+                shardingAlgorithmName: database-inline
+            # 表策略
+            tableStrategy:
+              standard:
+                shardingColumn: order_id
+                shardingAlgorithmName: t-order-inline
+            # 主键策略
+            key-generate-strategy:
+              column: order_id
+              key-generator-name: snowflake
+    props:
+      sql-show: true
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
