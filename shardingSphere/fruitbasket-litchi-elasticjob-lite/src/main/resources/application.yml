@@ -1,0 +1,10 @@
+elasticjob:
+  regCenter:
+    serverLists: zookeeperhost1:2181,zookeeperhost2:2181,zookeeperhost3:2181,zookeeperhost4:2181
+    namespace: elasticjob-lite
+  jobs:
+    userDataflowJob:
+      elasticJobClass: cn.fruitbasket.litchi.elasticjob.lite.UserDataflowJob
+      cron: 0/5 * * * * ?
+      shardingTotalCount: 5
+      overwrite: true
