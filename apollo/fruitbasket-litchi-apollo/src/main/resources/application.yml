@@ -1,0 +1,10 @@
+app:
+  id: fruitbasket-litchi-apollo                   # 应用唯一标识
+apollo:
+  cache-dir: /Users/loon/apollo                   # 配置缓存路径
+  autoUpdateInjectedSpringProperties: true        # 是否开启 Spring 参数自动更新
+  bootstrap:
+    enabled: true                                 # 是否开启 Apollo
+    eagerLoad:
+      enabled: true                               # 在初始化日志系统之前先从Apollo加载配置
+  meta:
