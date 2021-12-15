@@ -1,10 +1,7 @@
 package cn.fruitbasket.litchi.kafka;
 
 import org.apache.kafka.clients.consumer.*;
-import org.apache.kafka.clients.producer.KafkaProducer;
-import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.clients.producer.ProducerRecord;
-import org.apache.kafka.clients.producer.RecordMetadata;
+import org.apache.kafka.clients.producer.*;
 import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -22,7 +19,7 @@ import static org.apache.kafka.clients.producer.ProducerConfig.*;
  * @author LiuBing
  * @date 2021/9/17
  */
-public class Sample1 {
+public class ConsumerCommitSample {
 
     /**
      * 执行前先在任意broker服务器创建名为test的topic，指明使用2个分区和2个副本
@@ -121,7 +118,8 @@ public class Sample1 {
 
         consumer.subscribe(Collections.singleton(TOPIC), listener);
         new Timer().schedule(consumerTask.setConsumer(consumer), 0, 3000);
-        while (true) ;
+        while (true) {
+        }
     }
 }
 
@@ -145,15 +143,18 @@ class EachRecord extends ConsumerTask {
         // 拉取数据，参数是没有数据的时候阻塞等待的时间，0代表一直阻塞
         // 一个分区只能由一个消费者消费，但是一个消费者可以消费多个分区，所以这里是一个集合，来自不同的分区
         ConsumerRecords<String, String> records = consumer.poll(Duration.ZERO);
-        if (records.isEmpty()) return;
-        else System.out.println("拉取的分区：" + records.partitions());
+        if (records.isEmpty()) {
+            return;
+        } else {
+            System.out.println("拉取的分区：" + records.partitions());
+        }
 
         for (ConsumerRecord<String, String> record : records) {
             System.out.println(String.format("消费的分区信息————partition:%s, offset:%s, key:%s, value:%s",
                     record.partition(), record.offset(), record.key(), record.value()));
 
             Map<TopicPartition, OffsetAndMetadata> offsets = new HashMap<>();
-            offsets.put(new TopicPartition(Sample1.TOPIC, record.partition()), new OffsetAndMetadata(record.offset()));
+            offsets.put(new TopicPartition(ConsumerCommitSample.TOPIC, record.partition()), new OffsetAndMetadata(record.offset()));
             consumer.commitSync(offsets);
         }
     }
@@ -169,8 +170,11 @@ class EachPartition extends ConsumerTask {
         // 拉取数据，参数是没有数据的时候阻塞等待的时间，0代表一直阻塞
         // 一个分区只能由一个消费者消费，但是一个消费者可以消费多个分区，所以这里是一个集合，来自不同的分区
         ConsumerRecords<String, String> records = consumer.poll(Duration.ZERO);
-        if (records.isEmpty()) return;
-        else System.out.println("拉取的分区：" + records.partitions());
+        if (records.isEmpty()) {
+            return;
+        } else {
+            System.out.println("拉取的分区：" + records.partitions());
+        }
 
         // 不同的分区并行处理
         records.partitions().parallelStream().forEach(partition -> {
@@ -199,8 +203,11 @@ class EachPull extends ConsumerTask {
         // 拉取数据，参数是没有数据的时候阻塞等待的时间，0代表一直阻塞
         // 一个分区只能由一个消费者消费，但是一个消费者可以消费多个分区，所以这里是一个集合，来自不同的分区
         ConsumerRecords<String, String> records = consumer.poll(Duration.ZERO);
-        if (records.isEmpty()) return;
-        else System.out.println("拉取的分区：" + records.partitions());
+        if (records.isEmpty()) {
+            return;
+        } else {
+            System.out.println("拉取的分区：" + records.partitions());
+        }
 
         for (ConsumerRecord<String, String> record : records) {
             System.out.println(String.format("消费的分区信息————partition:%s, offset:%s, key:%s, value:%s",
