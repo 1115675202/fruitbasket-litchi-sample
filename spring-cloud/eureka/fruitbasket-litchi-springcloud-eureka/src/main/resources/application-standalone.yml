@@ -1,0 +1,25 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: litchi-eureka
+
+eureka:
+  instance:
+    hostname: localhost
+    lease-renewal-interval-in-seconds: 5
+    lease-expiration-duration-in-seconds: 30
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    registry-fetch-interval-seconds: 5
+  server:
+    # 关闭自我保护，服务续约不及时立刻剔除
+    enable-self-preservation: false
+    # 禁用只读缓存，获取最新注册信息
+    use-read-only-response-cache: false
+    # 缩短剔除服务任务间隔时间，加快剔除服务
+    eviction-interval-timer-in-ms: 5000

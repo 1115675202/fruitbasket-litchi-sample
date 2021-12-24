@@ -1,0 +1,10 @@
+server:
+  port: 8763
+
+eureka:
+  instance:
+    hostname: eureka.peer3.cn
+
+spring:
+  profiles:
+    include: cluster

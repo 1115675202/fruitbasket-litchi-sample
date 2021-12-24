@@ -1,0 +1,10 @@
+server:
+  port: 8762
+
+eureka:
+  instance:
+    hostname: eureka.peer2.cn
+
+spring:
+  profiles:
+    include: cluster

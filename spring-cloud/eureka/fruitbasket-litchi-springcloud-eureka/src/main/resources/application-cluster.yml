@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: litchi-eureka
+
+eureka:
+  client:
+    registerWithEureka: true
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://eureka.peer1.cn:8761/eureka/,http://eureka.peer2.cn:8762/eureka/,http://eureka.peer3.cn:8763/eureka/
+  server:
+    # 加快自我保护模式服务剔除的速度
+    eviction-interval-timer-in-ms: 5000
+    # 加快只读缓存同步速度
+    response-cache-update-interval-ms: 1000
