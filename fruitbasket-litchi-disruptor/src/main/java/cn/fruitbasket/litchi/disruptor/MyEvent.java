@@ -5,7 +5,7 @@ package cn.fruitbasket.litchi.disruptor;
  *
  * @param <T>发布的数据类型
  * @author LiuBing
- * @date 2021/9/22
+ * @since 2021/9/22
  */
 public class MyEvent<T> {
 

@@ -3,19 +3,18 @@ package cn.fruitbasket.litchi.kafka;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static cn.fruitbasket.litchi.kafka.ProducerSampleTest.BROKER_ADDRESSES;
+import static cn.fruitbasket.litchi.kafka.ProducerSampleTest.TOPIC;
+
 class ConsumerCommitSampleTest {
 
-    private ConsumerCommitSample consumerCommitSample;
+    private static final String CONSUMER_GROUP = "g1";
+
+    private DiffCommitConsumerSample consumerCommitSample;
 
     @BeforeEach
     void init() {
-        this.consumerCommitSample = new ConsumerCommitSample();
-    }
-
-
-    @Test
-    void producer() {
-        this.consumerCommitSample.producer();
+        this.consumerCommitSample = new DiffCommitConsumerSample();
     }
 
     /**
@@ -23,7 +22,7 @@ class ConsumerCommitSampleTest {
      */
     @Test
     void consumerCommitEachRecord() {
-        this.consumerCommitSample.consumer("g1", new EachRecord());
+        this.consumerCommitSample.consume(BROKER_ADDRESSES, TOPIC, CONSUMER_GROUP, new EachRecord());
     }
 
     /**
@@ -31,7 +30,7 @@ class ConsumerCommitSampleTest {
      */
     @Test
     void consumerCommitEachPartition() {
-        this.consumerCommitSample.consumer("g1", new EachPartition());
+        this.consumerCommitSample.consume(BROKER_ADDRESSES, TOPIC, CONSUMER_GROUP, new EachPartition());
     }
 
     /**
@@ -39,6 +38,6 @@ class ConsumerCommitSampleTest {
      */
     @Test
     void consumerCommitEachPull() {
-        this.consumerCommitSample.consumer("g1", new EachPull());
+        this.consumerCommitSample.consume(BROKER_ADDRESSES, TOPIC, CONSUMER_GROUP, new EachPull());
     }
 }

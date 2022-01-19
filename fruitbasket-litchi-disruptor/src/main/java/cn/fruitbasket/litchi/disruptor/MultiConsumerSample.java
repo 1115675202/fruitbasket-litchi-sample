@@ -13,7 +13,7 @@ import static com.lmax.disruptor.dsl.ProducerType.SINGLE;
 
 /**
  * @author LiuBing
- * @date 2021/9/22
+ * @since 2021/9/22
  */
 public class MultiConsumerSample {
 

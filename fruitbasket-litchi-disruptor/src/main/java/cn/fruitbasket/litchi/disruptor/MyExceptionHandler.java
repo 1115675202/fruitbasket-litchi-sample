@@ -7,7 +7,7 @@ import com.lmax.disruptor.ExceptionHandler;
  *
  * @param <T>发布的数据类型
  * @author LiuBing
- * @date 2021/9/22
+ * @since 2021/9/22
  */
 public class MyExceptionHandler<T> implements ExceptionHandler<MyEvent<T>> {
 

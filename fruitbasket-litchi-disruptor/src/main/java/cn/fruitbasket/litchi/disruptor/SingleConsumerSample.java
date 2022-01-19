@@ -16,7 +16,7 @@ import static com.lmax.disruptor.dsl.ProducerType.SINGLE;
  * 单消费者
  *
  * @author LiuBing
- * @date 2021/9/22
+ * @since 2021/9/22
  */
 public class SingleConsumerSample {
 

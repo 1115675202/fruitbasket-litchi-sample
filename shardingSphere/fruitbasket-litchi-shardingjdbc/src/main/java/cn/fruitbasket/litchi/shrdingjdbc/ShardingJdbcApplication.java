@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author LiuBing
- * @date 2021/11/26
+ * @since 2021/11/26
  */
 @SpringBootApplication
 @MapperScan("cn.fruitbasket.litchi.shrdingjdbc.mapper")

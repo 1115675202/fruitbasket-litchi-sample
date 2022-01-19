@@ -12,7 +12,7 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 
 /**
  * @author LiuBing
- * @date 2021/12/23
+ * @since 2021/12/23
  */
 @EnableAdminServer
 @SpringBootApplication

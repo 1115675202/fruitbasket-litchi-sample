@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author LiuBing
- * @date 2021/12/23
+ * @since 2021/12/23
  */
 @SpringBootApplication
 public class SpringCloudAdminClientApplication {

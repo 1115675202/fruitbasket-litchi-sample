@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author LiuBing
- * @date 2021/12/7
+ * @since 2021/12/7
  */
 @RestController
 @EnableApolloConfig

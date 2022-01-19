@@ -12,7 +12,7 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
  * MyBatis-Plus 代码生成
  *
  * @author LiuBing
- * @date 2021/8/5
+ * @since 2021/8/5
  */
 public class MyBatisPlusCodeGenerator {
 
